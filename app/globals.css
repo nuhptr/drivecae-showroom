@@ -96,6 +96,33 @@
 }
 /* END: Home styles */
 
+/* START: searchbar styles */
+.searchbar {
+  @apply relative flex items-center justify-start w-full max-w-3xl max-sm:flex-col max-sm:gap-4;
+}
+.searchbar__item {
+  @apply relative flex items-center justify-start flex-1 max-sm:w-full;
+}
+.searchbar__input {
+  @apply w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm;
+}
+/* END: searchbar styles */
+
+/* START: search manufacturer styles */
+.search-manufacturer {
+  @apply flex items-center justify-start flex-1 max-sm:w-full;
+}
+.search-manufacturer__input {
+  @apply w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none cursor-pointer text-sm;
+}
+.search-manufacturer__options {
+  @apply absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+}
+.search-manufacturer__option {
+  @apply py-2 pl-10 pr-4 cursor-default select-none;
+}
+/* END: search manufacturer styles */
+
 /* START: Car Card styles */
 .car-card {
   @apply flex flex-col items-start justify-center p-6 text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl;
@@ -152,30 +179,3 @@
   @apply absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
 }
 /* END: Custom Filter styles */
-
-/* START: searchbar styles */
-.searchbar {
-  @apply relative flex items-center justify-start w-full max-w-3xl max-sm:flex-col max-sm:gap-4;
-}
-.searchbar__item {
-  @apply relative flex items-center justify-start flex-1 max-sm:w-full;
-}
-.searchbar__input {
-  @apply w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm;
-}
-/* END: searchbar styles */
-
-/* START: search manufacturer styles */
-.search-manufacturer {
-  @apply flex items-center justify-start flex-1 max-sm:w-full;
-}
-.search-manufacturer__input {
-  @apply w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none cursor-pointer text-sm;
-}
-.search-manufacturer__options {
-  @apply absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
-}
-.search-manufacturer__option {
-  @apply py-2 pl-10 pr-4 cursor-default select-none;
-}
-/* END: search manufacturer styles */
