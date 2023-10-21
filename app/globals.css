@@ -78,15 +78,6 @@
 }
 /* END: Footer styles */
 
-/* START: Home styles */
-.home__cars-wrapper {
-  @apply grid w-full grid-cols-1 gap-8 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 pt-14;
-}
-.home__error-container {
-  @apply flex flex-col items-center justify-center gap-2 mt-16;
-}
-/* END: Home styles */
-
 /* START: searchbar styles */
 .searchbar__input {
   @apply w-full h-[48px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none cursor-pointer text-sm;
