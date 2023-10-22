@@ -13,4 +13,4 @@ This is showroom card project build with Next.js.
 
 ## Dependencies
 
--  [Headless UI](https://headlessui.dev/) - npm install @headlessui/react
+-  [Headless UI](https://headlessui.dev/) - npm install @headlessui/react (usually comes with 'use client' option in Nextjs)
