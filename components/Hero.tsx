@@ -2,6 +2,8 @@
 
 import Image from "next/image"
 
+import hero from "@/public/hero.png"
+
 import { CustomButton } from "@/components"
 
 export default function Hero() {
@@ -21,7 +23,7 @@ export default function Hero() {
 
          <div className="hero__image-container">
             <div className="hero__image">
-               <Image src={"/hero.png"} alt="Hero" fill className="object-contain" />
+               <Image src={hero} alt="Hero" fill className="object-contain" />
             </div>
             <div className="hero__image-overlay" />
          </div>

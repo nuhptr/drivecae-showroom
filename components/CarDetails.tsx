@@ -32,6 +32,7 @@ export default function CarDetails({ isOpen, closeModal, car }: CarDetailsProps)
       <>
          <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
+               {/* Backdrop */}
                <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -108,9 +109,9 @@ export default function CarDetails({ isOpen, closeModal, car }: CarDetailsProps)
                                  {car.make} {car.model}
                               </h2>
 
-                              <div className="flex flex-wrap gap-4 mt-3">
+                              <div className="flex flex-wrap mt-3 gap-4">
                                  {Object.entries(car).map(([key, value]) => (
-                                    <div className="flex justify-between w-full gap-5 text-right" key={key}>
+                                    <div className="flex justify-between w-full text-right gap-5" key={key}>
                                        <h4 className="capitalize text-grey">{key.split("_").join(" ")}</h4>
                                        <p className="font-semibold text-black-100">{value}</p>
                                     </div>

@@ -7,11 +7,11 @@ import { Combobox, Transition } from "@headlessui/react"
 import { manufacturers } from "@/constant"
 
 type ISearchManufacturerProps = {
-   manufacturer: string
-   setManufacturer: (manufacturer: string) => void
+   selected: string
+   setSelected: (manufacturer: string) => void
 }
 
-export default function SearchManufacturer({ manufacturer, setManufacturer }: ISearchManufacturerProps) {
+export default function SearchManufacturer({ selected, setSelected }: ISearchManufacturerProps) {
    const [query, setQuery] = useState<string>("")
 
    const filteredManufacturers =
@@ -23,7 +23,7 @@ export default function SearchManufacturer({ manufacturer, setManufacturer }: IS
 
    return (
       <div className="flex items-center justify-start flex-1 max-sm:w-full">
-         <Combobox value={manufacturer} onChange={setManufacturer}>
+         <Combobox value={selected} onChange={setSelected}>
             <div className="relative w-full">
                <Combobox.Button className="absolute top-[14px]">
                   <Image src={"/car-logo.svg"} alt="Car Logo" width={20} height={20} className="ml-4" />
