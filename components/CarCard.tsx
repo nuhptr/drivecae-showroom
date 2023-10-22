@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 
-import { calculateCarRent } from "@/utils"
+import { calculateCarRent, generateCarImageUrl } from "@/utils"
 import { CustomButton, CarDetails } from "@/components"
 
 type ICarCardProps = {
@@ -44,7 +44,7 @@ export default function CarCard({ car }: CarProps) {
          </p>
 
          <div className="relative object-contain w-full h-40 my-3">
-            <Image src={"/hero.png"} alt="Car Model" fill priority className="object-contain" />
+            <Image src={generateCarImageUrl(car)} alt="Car Model" fill priority className="object-contain" />
          </div>
 
          {/* Engine Details */}
