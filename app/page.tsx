@@ -1,10 +1,62 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 import { fetchCars } from "@/utils"
-import { Hero, SearchBar, CustomFilter, CarCard } from "@/components"
+import { fuels, yearsOfProduction } from "@/constant"
 
-export default async function Home() {
-   const allCars = await fetchCars()
+import { Hero, SearchBar, CustomFilter, CarCard, ShowMore } from "@/components"
 
-   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars
+type IFilterProps = {
+   manufacturer?: string
+   model?: string
+   fuel?: string
+   limit?: number
+   year?: number
+}
+
+type IHomeProps = {
+   searchParams: IFilterProps
+}
+
+export default function Home() {
+   const [allCars, setAllCars] = useState([])
+   const [isLoading, setIsLoading] = useState(false)
+
+   // search states
+   const [manufacturer, setManufacturer] = useState("")
+   const [model, setModel] = useState("")
+
+   // filter states
+   const [fuel, setFuel] = useState("")
+   const [year, setYear] = useState(2022)
+
+   // pagination states
+   const [limit, setLimit] = useState(10)
+
+   const getCars = async () => {
+      try {
+         setIsLoading(true)
+         const result = await fetchCars({
+            manufacturer: manufacturer || "",
+            model: model || "",
+            fuel: fuel || "",
+            year: year || 2022,
+            limit: limit || 10,
+         })
+
+         console.log(result)
+         setAllCars(result)
+      } catch (error) {
+         console.error(error)
+      } finally {
+         setIsLoading(false)
+      }
+   }
+
+   useEffect(() => {
+      getCars()
+   }, [fuel, year, limit, manufacturer, model])
 
    return (
       <main className="overflow-hidden">
@@ -17,26 +69,37 @@ export default async function Home() {
             </div>
 
             <div className="flex flex-wrap items-center justify-between w-full gap-5 mt-12">
-               <SearchBar />
+               <SearchBar setManufacturer={setManufacturer} setModel={setModel} />
                <div className="flex flex-wrap items-center justify-start gap-2">
-                  <CustomFilter title="fuel" />
-                  <CustomFilter title="year" />
+                  <CustomFilter title="fuel" options={fuels} setFilter={setFuel} />
+                  <CustomFilter title="year" options={yearsOfProduction} setFilter={setYear} />
                </div>
             </div>
 
-            {!isDataEmpty && (
+            {allCars.length > 0 && (
                <section>
                   <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 pt-14">
-                     {allCars?.map((car, index) => (
-                        <CarCard car={car} key={index} />
+                     {allCars?.map((car) => (
+                        <CarCard car={car} key={car} />
                      ))}
                   </div>
+
+                  {isLoading && (
+                     <div className="w-full mt-16 flex-center">
+                        <p className="text-2xl font-medium">Loading...</p>
+                     </div>
+                  )}
+
+                  <ShowMore
+                     pageNumber={(limit || 10) / 10}
+                     isNext={(limit || 10) > allCars.length}
+                     setLimit={setLimit}
+                  />
                </section>
             )}
-            {isDataEmpty && (
+            {allCars.length === 0 && (
                <div className="flex flex-col items-center justify-center gap-2 mt-16">
-                  <h2 className="text-xl font-bold text-black">Oops, no results</h2>
-                  <p>{allCars?.message}</p>
+                  <h2 className="text-xl font-bold text-black">Looking for the cars...</h2>
                </div>
             )}
          </div>
