@@ -4,7 +4,6 @@ import Image from "next/image"
 import { useState } from "react"
 
 import { calculateCarRent } from "@/utils"
-
 import { CustomButton, CarDetails } from "@/components"
 
 type ICarCardProps = {
@@ -22,8 +21,12 @@ type ICarCardProps = {
    year: number
 }
 
-export default function CarCard({ model, make, city_mpg, drive, transmission, year }: ICarCardProps) {
-   const carRent = calculateCarRent(city_mpg, year)
+type CarProps = {
+   car: ICarCardProps
+}
+
+export default function CarCard({ car }: CarProps) {
+   const carRent = calculateCarRent(car.city_mpg, car.year)
 
    const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -31,7 +34,7 @@ export default function CarCard({ model, make, city_mpg, drive, transmission, ye
       <div className="car-card group">
          <div className="car-card__content">
             <h2 className="car-card__content-title">
-               {make} {model}
+               {car.make} {car.model}
             </h2>
          </div>
 
@@ -49,15 +52,15 @@ export default function CarCard({ model, make, city_mpg, drive, transmission, ye
             <div className="flex justify-between w-full group-hover:invisible text-gray">
                <div className="flex flex-col items-center justify-center gap-2">
                   <Image src={"/steering-wheel.svg"} width={20} height={20} alt="Sterring Wheel" />
-                  <p className="text-[14px]">{transmission === "a" ? "Automatic" : "Manual"}</p>
+                  <p className="text-[14px]">{car.transmission === "a" ? "Automatic" : "Manual"}</p>
                </div>
                <div className="flex flex-col items-center justify-center gap-2">
                   <Image src={"/tire.svg"} width={20} height={20} alt="Sterring Wheel" />
-                  <p className="text-[14px]">{drive.toUpperCase()}</p>
+                  <p className="text-[14px]">{car.drive.toUpperCase()}</p>
                </div>
                <div className="flex flex-col items-center justify-center gap-2">
                   <Image src={"/gas.svg"} width={20} height={20} alt="Sterring Wheel" />
-                  <p className="text-[14px]">{city_mpg} MPG</p>
+                  <p className="text-[14px]">{car.city_mpg} MPG</p>
                </div>
             </div>
 
@@ -67,21 +70,12 @@ export default function CarCard({ model, make, city_mpg, drive, transmission, ye
                   containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
                   textStyles="text-white text-[14px] leading-[17px] font-bold"
                   rightIcon="/right-arrow.svg"
-                  handleClick={() => {}}
+                  handleClick={() => setIsOpen(true)}
                />
             </div>
          </div>
 
-         <CarDetails
-            isOpen={isOpen}
-            closeModal={() => setIsOpen(false)}
-            model={model}
-            make={make}
-            city_mpg={city_mpg}
-            drive={drive}
-            transmission={transmission}
-            year={year}
-         />
+         <CarDetails car={car} closeModal={() => setIsOpen(false)} isOpen={isOpen} />
       </div>
    )
 }
