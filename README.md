@@ -2,7 +2,7 @@
 
 This is showroom card project build with Next.js.
 
-<!-- Image Section -->
+![Cardrive-showroom](https://github.com/nuhptr/drivecar-showroom/assets/50306963/67b2f7fd-6fc1-4101-af27-4c552ea77f2f)
 
 ## Tech Stack
 
